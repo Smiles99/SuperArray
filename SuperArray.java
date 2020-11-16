@@ -26,11 +26,21 @@ public class SuperArray {
         return SuperArray;
     }
     public String get(int Index) {
-        return SuperArray[Index];
+        if (Index < 0 || Index >=size()) {
+            return SuperArray[Index];
+        } else {
+            System.out.println("Invalid Index");
+            return SuperArray;
+        }
     }
     public String set(int Index, String element) {
-        SuperArray[Index] = element;
-        return SuperArray;
+        if (Index < 0 || Index >= size()) {
+            SuperArray[Index] = element;
+            return SuperArray;
+        } else {
+            System.out.println("Invalid Index");
+            return SuperArray;
+        }
     }
     private void resize() {
         int z = 0;
@@ -90,36 +100,49 @@ public class SuperArray {
         }
     }
     public SuperArray(int initialCapacity) {
-        String[] CapArray = new String[initialCapacity];
-        SuperArray = CapArray;
+        if (initialCapacity >= 0 ) {
+            String[] CapArray = new String[initialCapacity];
+            SuperArray = CapArray;
+        } else {
+            System.out.println("Invalid Capacity");
+        }
     }
     public void add(int index, String element) {
-        String hold1 = "";
-        String hold2 = "";
-        int d = index;
-        while (d < SuperArray.length) {
-            if (hold1 == "") {
-                hold1 = SuperArray[d];
-                SuperArray[d] = element;
-                d++;
-            }  else {
-                hold2 = SuperArray[d];
-                SuperArray[d] = hold1;
-                hold1 = hold2;
-                d++;
+        if (index < 0 || index > size()) {
+            String hold1 = "";
+            String hold2 = "";
+            int d = index;
+            while (d < SuperArray.length) {
+                if (hold1 == "") {
+                    hold1 = SuperArray[d];
+                    SuperArray[d] = element;
+                    d++;
+                }  else {
+                    hold2 = SuperArray[d];
+                    SuperArray[d] = hold1;
+                    hold1 = hold2;
+                    d++;
+                }
             }
+        } else {
+            System.out.println("Invalid Index");
         }
     }
     public String remove(int index) {
-        int e = index;
-        while (e < SuperArray.length) {
-            if (e == SuperArray.length - 1) {
-                SuperArray[e] = "";
-            } else {
-                SuperArray[e] = SuperArray[e + 1];
+        if (index < 0 || index >= size()) {
+            int e = index;
+            while (e < SuperArray.length) {
+                if (e == SuperArray.length - 1) {
+                    SuperArray[e] = "";
+                } else {
+                    SuperArray[e] = SuperArray[e + 1];
+                }
             }
+            return SuperArray;
+        } else {
+            System.out.println("Invalid Index");
+            return SuperArray;
         }
-        return SuperArray;
     }
     public int indexOf(String s) {
         int f = 0;
@@ -258,5 +281,4 @@ public class SuperArray {
         }
         return zipped;
     }
-
 }
