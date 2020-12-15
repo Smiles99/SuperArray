@@ -11,17 +11,17 @@ public class SuperArray {
         return size;
     }
 
-    public boolean add(String element) {
+    public String[] add(String element) {
         int x = 0;
-        String[] hold = new String[0];
-        if (x + 1 < size()) {
-            data[x + 1] = data + element;
+        String[] hold = new String[size + 1];
+        if (x + 1 < size) {
+            data[x + 1] = element;
         } else {
-            //resize();
             hold = data;
-            data = new String[size() + 1];
+            hold[x + 1] = element;
+            data = hold;
         }
-        return true;
+        return data;
     }
 
     public String get(int Index) {
@@ -199,7 +199,7 @@ public class SuperArray {
     }
 
     public static void main(String[] args) {
-        SuperArray words = new SuperArray();
+        SuperArray words = new SuperArray(3);
         words.add("kani");
         words.add("uni");
         words.add("ebi");
