@@ -28,9 +28,7 @@ public class SuperArray {
         if (Index >= 0 && Index < size()) {
             return data[Index];
         } else {
-            System.out.println("Invalid Index");
-            String Invalid = "Invalid Index";
-            return Invalid;
+            throw new IllegalArgumentException("Invalid Index");
         }
     }
 
@@ -39,8 +37,7 @@ public class SuperArray {
             data[Index] = element;
             return element;
         } else {
-            System.out.println("Invalid Index");
-            return "Invalid Index";
+            throw new IllegalArgumentException("Invalid Index");
         }
     }
 
@@ -111,7 +108,7 @@ public class SuperArray {
             String[] CapArray = new String[initialCapacity];
             data = CapArray;
         } else {
-            System.out.println("Invalid Capacity");
+            throw new IllegalArgumentException("Invalid Capacity");
         }
     }
 
@@ -133,7 +130,7 @@ public class SuperArray {
                 }
             }
         } else {
-            System.out.println("Invalid Index");
+            throw new IllegalArgumentException("Invalid Index");
         }
     }
 
@@ -149,8 +146,7 @@ public class SuperArray {
             }
             return "";
         } else {
-            System.out.println("Invalid Index");
-            return "Invalid Index";
+            throw new IllegalArgumentException("Invalid Index");
         }
     }
 
