@@ -41,7 +41,7 @@ public class SuperArray {
     }
 
     public String get(int Index) {
-        if (Index < 0 || Index > size) {
+        if (Index < 0 || Index >= size) {
             throw new IndexOutOfBoundsException("Index out of bounds");
         }
         return data[Index];
@@ -51,7 +51,7 @@ public class SuperArray {
         if (element == null) {
             throw new IllegalArgumentException("Cannot add a null element");
         }
-        if (Index < 0 || Index > size) {
+        if (Index < 0 || Index >= size) {
             throw new IndexOutOfBoundsException("Index out of bounds");
         }
         data[Index] = element;
@@ -161,7 +161,7 @@ public class SuperArray {
     }
 
     public String remove(int index) {
-        if (index < 0 || index > size) {
+        if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException("Index out of bounds");
         }
         String temp = data[index];
