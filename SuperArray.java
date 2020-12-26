@@ -41,11 +41,10 @@ public class SuperArray {
     }
 
     public String get(int Index) {
-        if (Index >= 0 && Index < size) {
-            return data[Index];
-        } else {
-            throw new IllegalArgumentException("Invalid Index");
+        if (Index < 0 || Index > size) {
+            throw new IndexOutOfBoundsException("Index out of bounds");
         }
+        return data[Index];
     }
 
     public String set(int Index, String element) {
