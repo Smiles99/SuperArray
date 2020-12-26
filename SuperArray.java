@@ -162,18 +162,21 @@ public class SuperArray {
     }
 
     public String remove(int index) {
-        if (index < 0 || index >= size()) {
-            int e = index;
-            while (e < size) {
-                if (e == size - 1) {
-                    data[e] = "";
-                } else {
-                    data[e] = data[e + 1];
-                }
-            }
-            return "";
+        if (index < 0 || index > size) {
+            throw new IndexOutOfBoundsException("Index out of bounds");
+        }
+        String temp = data[index];
+        if (index == size - 1) {
+            data[index] = null;
+            size--;
+            return temp;
         } else {
-            throw new IllegalArgumentException("Invalid Index");
+            for (int i = index + 1; i < size; i++) {
+                data[i - 1] = data[i];
+            }
+            data[size - 1] = null;
+            size--;
+            return temp;
         }
     }
 
