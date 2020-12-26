@@ -49,12 +49,14 @@ public class SuperArray {
     }
 
     public String set(int Index, String element) {
-        if (Index < 0 || Index >= size()) {
-            data[Index] = element;
-            return element;
-        } else {
-            throw new IllegalArgumentException("Invalid Index");
+        if (element == null) {
+            throw new IllegalArgumentException("Cannot add a null element");
         }
+        if (Index < 0 || Index > size) {
+            throw new IndexOutOfBoundsException("Index out of bounds");
+        }
+        data[Index] = element;
+        return element;
     }
 
     private void resize() {
