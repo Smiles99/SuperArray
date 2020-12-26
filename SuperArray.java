@@ -12,20 +12,36 @@ public class SuperArray {
     }
 
     public String[] add(String element) {
-        int x = 0;
-        String[] hold = new String[size + 1];
-        if (x + 1 < size) {
-            data[x + 1] = element;
+        if (element == null) {
+            throw new IllegalArgumentException("Cannot add a null element");
+        }
+        if (size == 0) {
+            data[0] = element;
+            size++;
         } else {
-            hold = data;
-            hold[x + 1] = element;
-            data = hold;
+            boolean isSpace = false;
+            int index = 0;
+            for (int i = 0; i < size; i++) {
+                if (data[i] == null) {
+                    isSpace = true;
+                    index = i;
+                    break;
+                }
+            }
+            if (isSpace == true) {
+                data[index] = element;
+                size++;
+            } else if (isSpace == false && data[size - 1] != null) {
+                resize();
+                data[size] = element;
+                size++;
+            }
         }
         return data;
     }
 
     public String get(int Index) {
-        if (Index >= 0 && Index < size()) {
+        if (Index >= 0 && Index < size) {
             return data[Index];
         } else {
             throw new IllegalArgumentException("Invalid Index");
@@ -42,28 +58,20 @@ public class SuperArray {
     }
 
     private void resize() {
-        int z = 0;
-        int y = size;
-        String[] NewArray = new String[y];
-        while (z < size) {
-            NewArray[z] = data[z];
-            z++;
+        String[] newArray = new String[size * 2];
+        for (int i = 0; i < size; i++) {
+            newArray[i] = data[i];
         }
-        data = NewArray;
-        y++;
+        data = newArray;
     }
 
     public void clear() {
-        String[] clearArray = new String[0];
-        data = clearArray;
+        data = new String[10];
+        size = 0;
     }
 
     public boolean isEmpty() {
-        if (data[0] == null) {
-            return true;
-        } else {
-            return false;
-        }
+        return size == 0;
     }
 
     public String toString() {
@@ -113,24 +121,24 @@ public class SuperArray {
     }
 
     public void add(int index, String element) {
-        if (index < 0 || index > size()) {
-            String hold1 = "";
-            String hold2 = "";
-            int d = index;
-            while (d < size) {
-                if (hold1 == "") {
-                    hold1 = data[d];
-                    data[d] = element;
-                    d++;
-                } else {
-                    hold2 = data[d];
-                    data[d] = hold1;
-                    hold1 = hold2;
-                    d++;
-                }
-            }
+        if (element == null) {
+            throw new IllegalArgumentException("Cannot add null element");
+        }
+        if (index ==  size) {
+            throw new IndexOutOfBoundsException("Index out of bounds");
+        }
+        if (data[size] != null) {
+            resize();
+        }
+        if (index == size) {
+            data[index] = element;
+            size++;
         } else {
-            throw new IllegalArgumentException("Invalid Index");
+            for (int i = size - 1; i >= index; i--) {
+                data[i + 1] = data[i];
+            }
+            data[index] = element;
+            size++;
         }
     }
 
@@ -195,7 +203,7 @@ public class SuperArray {
     }
 
     public static void main(String[] args) {
-        SuperArray words = new SuperArray(3);
+        SuperArray words = new SuperArray(2);
         words.add("kani");
         words.add("uni");
         words.add("ebi");
