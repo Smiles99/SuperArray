@@ -54,8 +54,9 @@ public class SuperArray {
         if (Index < 0 || Index >= size) {
             throw new IndexOutOfBoundsException("Index out of bounds");
         }
+        String temp = data[Index];
         data[Index] = element;
-        return element;
+        return temp;
     }
 
     private void resize() {
