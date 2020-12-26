@@ -58,11 +58,20 @@ public class SuperArray {
     }
 
     private void resize() {
-        String[] newArray = new String[size * 2];
-        for (int i = 0; i < size; i++) {
-            newArray[i] = data[i];
+        if (size == 0) {
+            String[] newArray = new String[(size + 1) * 2];
+            for (int i = 0; i < size; i++) {
+                newArray[i] = data[i];
+            }
+            data = newArray;
+        } else {
+            String[] newArray = new String[size * 2];
+            for (int i = 0; i < size; i++) {
+                newArray[i] = data[i];
+            }
+            data = newArray;
         }
-        data = newArray;
+
     }
 
     public void clear() {
@@ -124,13 +133,21 @@ public class SuperArray {
         if (element == null) {
             throw new IllegalArgumentException("Cannot add null element");
         }
-        if (index ==  size) {
+        if (index < 0 || index > size) {
             throw new IndexOutOfBoundsException("Index out of bounds");
         }
-        if (data[size] != null) {
+        boolean isSpace = false;
+        for (int i = 0; i < size; i++) {
+            if (data[i] == null) {
+                isSpace = true;
+                break;
+            }
+        }
+        if(isSpace == false) {
             resize();
         }
-        if (index == size) {
+
+        if (size == 0 || index == size) {
             data[index] = element;
             size++;
         } else {
